@@ -21,7 +21,7 @@ export class ErrorHandler implements ExceptionFilter {
     const responseBody = {
       code: httpStatus,
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
-      error: exception,
+      error: exception['response'] ?? exception,
       data: null,
     };
 
