@@ -19,9 +19,10 @@ export class ErrorHandler implements ExceptionFilter {
         ? exception.getStatus()
         : HttpStatus.INTERNAL_SERVER_ERROR;
     const responseBody = {
-      statusCode: httpStatus,
-      timestamp: new Date().toISOString(),
+      code: httpStatus,
       path: httpAdapter.getRequestUrl(ctx.getRequest()),
+      error: exception,
+      data: null,
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);

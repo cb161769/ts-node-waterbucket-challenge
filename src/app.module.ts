@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
+import { CommonModule } from './modules/common/common.module';
+import { BucketModule } from './modules/bucket/bucket.module';
 
 @Module({
-  imports: [],
+  imports: [CommonModule, BucketModule],
   controllers: [],
   providers: [],
 })

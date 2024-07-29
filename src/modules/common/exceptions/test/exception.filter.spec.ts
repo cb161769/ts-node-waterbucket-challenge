@@ -1,4 +1,4 @@
-import { ErrorHandler } from '../exception.filter';
+import { ErrorHandler } from '../exception.filter.module';
 import { ArgumentsHost } from '@nestjs/common';
 
 describe('MyExceptionFilter', () => {

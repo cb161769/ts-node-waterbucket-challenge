@@ -5,30 +5,26 @@ import {
 } from 'nest-winston';
 
 export const LoggerFactory = (appName: string) => {
-  let consoleFormat;
-
   const DEBUG = process.env.DEBUG;
-  const USE_JSON_LOGGER = process.env.USE_JSON_LOGGER;
 
-  if (USE_JSON_LOGGER === 'true') {
-    consoleFormat = format.combine(
-      format.ms(),
-      format.timestamp(),
-      format.json(),
-    );
-  } else {
-    consoleFormat = format.combine(
-      format.timestamp(),
-      format.ms(),
-      nestWinstonModuleUtilities.format.nestLike(appName, {
-        colors: true,
-        prettyPrint: true,
-      }),
-    );
-  }
+  const consoleFormat = format.combine(
+    format.timestamp({
+      format: 'YYYY-MM-DD hh:mm:ss.SSS A'
+    }),
+    format.ms(),
+    nestWinstonModuleUtilities.format.nestLike(appName, {
+      colors: true,
+      prettyPrint: true,
+    }),
+    format.metadata(),
+    format.json(),
+    format.align(),
+    format.errors()
+  );
 
   return WinstonModule.createLogger({
     level: DEBUG ? 'debug' : 'info',
     transports: [new transports.Console({ format: consoleFormat })],
+    
   });
 };
