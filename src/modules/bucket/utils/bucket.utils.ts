@@ -10,5 +10,7 @@ class bucketUtils {
     if (b == 0) return a;
     return this.gcd(b, a % b);
   }
+
+  public isVisited() {}
 }
 export default new bucketUtils();
