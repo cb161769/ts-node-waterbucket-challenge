@@ -117,9 +117,10 @@ npm run start
 | `amountWanted` | `number` | **Required**. the amount wanted of gallons |
 | `bucket.first` | `number` | **Required**. first jug water capacity |
 | `bucket.second` | `number` | **Required**. second jug water capacity |
-
+---
 ###### Responses
 
+* sucessful response
 
 ```json
 {
@@ -142,6 +143,39 @@ npm run start
     ]
   },
   "path": "/api/v1/waterbucket/compute"
+}
+
+```
+* sucessful response (unsolved)
+
+```json
+{
+  "code": 201,
+  "data": {
+    "status": "Unsolved",
+    "solution": null
+  },
+  "path": "/api/v1/waterbucket/compute"
+}
+```
+
+* an error occured 
+
+```json
+{
+  "code": 400,
+  "path": "/api/v1/waterbucket/compute",
+  "error": {
+    "message": [
+      "amountWanted must not be greater than 1000",
+      "amountWanted must be a positive number",
+      "amountWanted should not be empty",
+      "amountWanted must be a number conforming to the specified constraints"
+    ],
+    "error": "Bad Request",
+    "statusCode": 400
+  },
+  "data": null
 }
 
 ```
