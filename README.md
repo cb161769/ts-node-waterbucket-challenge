@@ -72,7 +72,13 @@ npm run install
 ```bash
 npm run build
 ```
-5. Start the server
+5. Add the following enviroment variables (.env) file: 
+```bash
+NODE_ENV=production
+DEBUG=true
+PORT=8080
+```
+6. Start the server
 ```bash
 npm run start
 ```
@@ -88,3 +94,54 @@ npm run start
 ---
 ## API Reference
 
+#### Compute
+
+```http
+  POST /api/v1/waterbucket/compute
+```
+##### Request Body
+```json
+{
+  "amountWanted": 1000,
+  "bucket": {
+    "first": 1000,
+    "second": 1000
+  }
+}
+
+```
+###### Description of the Request Body
+
+| Property | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `amountWanted` | `number` | **Required**. the amount wanted of gallons |
+| `bucket.first` | `number` | **Required**. first jug water capacity |
+| `bucket.second` | `number` | **Required**. second jug water capacity |
+
+###### Responses
+
+
+```json
+{
+  "code": 201,
+  "data": {
+    "status": "Solved",
+    "solution": [
+      {
+        "step": 0,
+        "action": "start with     ",
+        "bucketOne": 0,
+        "bucketTwo": 0
+      },
+      {
+        "step": 1,
+        "action": "fill jug Two **",
+        "bucketOne": 0,
+        "bucketTwo": 1000
+      }
+    ]
+  },
+  "path": "/api/v1/waterbucket/compute"
+}
+
+```
