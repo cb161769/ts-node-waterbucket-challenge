@@ -1,15 +1,15 @@
-FROM node:18.19.0-alpine3.18
+FROM node:lts
 
 WORKDIR /usr/src/app
 
 
-ENV NODE_ENV=production \
+ENV NODE_ENV=development \
     DEBUG=true \
     PORT=8080
 
 COPY . .
 
-RUN npm install -g @nestjs/cli typescript
+RUN npm install -g @nestjs/cli typescript @types/node
 
 RUN npm install
 
