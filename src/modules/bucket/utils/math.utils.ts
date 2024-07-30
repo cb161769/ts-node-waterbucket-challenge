@@ -1,4 +1,9 @@
-export function solve(firstJug, secondJug, start = [0, 0], goal = [0, 0]) {
+export function solve(
+  firstJug: number,
+  secondJug: number,
+  start = [0, 0],
+  goal = [0, 0],
+) {
   if (JSON.stringify(start) === JSON.stringify(goal)) {
     return [start];
   }
@@ -34,10 +39,10 @@ function getSuccessors(firstLevel, maxLevelA, secondLevel, maxLevelB) {
   if (firstLevel <= maxLevelA && secondLevel <= maxLevelB) {
     // Here is a list of possible legal moves.
     return [
-      [[maxLevelA, secondLevel], 'fill jug A'],
-      [[firstLevel, maxLevelB], 'fill jug B'],
-      [[0, secondLevel], 'empty jug A'],
-      [[firstLevel, 0], 'empty jug B'],
+      [[maxLevelA, secondLevel], 'fill jug One'],
+      [[firstLevel, maxLevelB], 'fill jug Two'],
+      [[0, secondLevel], 'empty jug One'],
+      [[firstLevel, 0], 'empty jug Two'],
       [
         firstLevel + secondLevel < maxLevelB
           ? [0, firstLevel + secondLevel]
@@ -45,7 +50,7 @@ function getSuccessors(firstLevel, maxLevelA, secondLevel, maxLevelB) {
               firstLevel - (maxLevelB - secondLevel),
               secondLevel + (maxLevelB - secondLevel),
             ],
-        'pour A to B',
+        'Transfer from jug One to jug Two',
       ],
       [
         firstLevel + secondLevel < maxLevelA
@@ -54,7 +59,7 @@ function getSuccessors(firstLevel, maxLevelA, secondLevel, maxLevelB) {
               firstLevel + (maxLevelA - firstLevel),
               secondLevel - (maxLevelA - firstLevel),
             ],
-        'pour B to A',
+        'Transfer from jug Two to jug One',
       ],
     ];
   } else {
